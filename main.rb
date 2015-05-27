@@ -37,7 +37,6 @@ get '/videos/genres' do
 end
 
 get '/videos/:genre' do
-  binding.pry
   sql = "select * from videos where genre = #{params[:genre]}"
   @videos_by_genre= run_sql(sql)
   erb :genre
