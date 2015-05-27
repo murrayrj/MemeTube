@@ -30,6 +30,12 @@ get '/videos/view/:id' do
   erb :view
 end
 
+get 'videos/genres' do
+  sql = "select genre from videos group by genre order by genre"
+  @genres = run_sql(sql)
+  erb :genres
+end
+
 private
 
 def run_sql(sql)
