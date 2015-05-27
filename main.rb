@@ -36,6 +36,12 @@ get 'videos/genres' do
   erb :genres
 end
 
+get 'videos/genres/:genre' do
+  sql = "select * from videos where genre = '#{params[:genre]}'"
+  @videos_by_genre= run_sql(sql)
+  erb :genre
+end
+
 private
 
 def run_sql(sql)
