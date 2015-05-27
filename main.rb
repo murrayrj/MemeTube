@@ -18,6 +18,12 @@ get '/videos/add' do
   erb :add
 end
 
+post '/videos' do
+  sql = "insert into videos (title, description, url, genre) values ('#{params[:title]}', '#{params[:description]}', '#{params[:url]}', '#{params[:genre]}')"
+  run_sql(sql)
+  redirect to("/videos/view/#{params[:id]}")
+end
+
 private
 
 def run_sql(sql)
