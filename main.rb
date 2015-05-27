@@ -43,8 +43,9 @@ get 'videos/:genre' do
   erb :genre
 end
 
-get '/edit/:id' do
+get 'edit/:id' do
   sql = "select * from videos where id = '#{params[:id]}'"
+  binding.pry
   @edit_video = run_sql(sql).first
   erb :edit
 end
