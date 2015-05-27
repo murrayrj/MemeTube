@@ -10,6 +10,7 @@ end
 get '/videos' do
   sql = "select * from videos"
   @videos = run_sql(sql)
+  @featured_video = run_sql(sql).to_a.sample['url']
   erb :index
 end
 
