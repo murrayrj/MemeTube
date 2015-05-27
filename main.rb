@@ -24,6 +24,12 @@ post '/videos' do
   redirect to("/videos/view/#{params[:id]}")
 end
 
+get '/videos/view/:id' do
+  sql = "select * from videos where id = #{params[:id]}"
+  @video = run_sql(sql).first
+  erb :view
+end
+
 private
 
 def run_sql(sql)
