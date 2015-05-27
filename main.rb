@@ -30,24 +30,35 @@ get '/videos/view/:id' do
   erb :view
 end
 
-get 'videos/genres' do
+get '/videos/genres' do
   sql = "select genre from videos group by genre order by genre"
   @genres = run_sql(sql)
   erb :genres
 end
 
-get 'videos/:genre' do
+get '/videos/:genre' do
   binding.pry
-  sql = "select * from videos where genre = '#{params[:genre]}'"
+  sql = "select * from videos where genre = #{params[:genre]}"
   @videos_by_genre= run_sql(sql)
   erb :genre
 end
 
-get 'edit/:id' do
-  sql = "select * from videos where id = '#{params[:id]}'"
-  binding.pry
-  @edit_video = run_sql(sql).first
+get '/videos/:id/edit' do
+  sql = "select * from videos where id = #{params[:id]}"
+  @video = run_sql(sql).first
   erb :edit
+end
+
+post '/videos/:id/' do
+  sql = "update videos set title = '#{params[:title]}', description = '#{params[:description]}', url = '#{params[:url]}', genre = '#{params[:genre]}' where id = #{params[:id]}"
+  run_sql(sql)
+  redirect to("/videos/#{params[:id]}")
+end
+
+get '/videos/:id/delete' do
+  sql = "DELETE FROM videos WHERE id = #{params[:id]}"
+  run_sql(sql)
+  redirect to("/videos")
 end
 
 private
@@ -55,13 +66,10 @@ private
 def run_sql(sql)
   conn = PG.connect(dbname: 'memetube', host: 'localhost')
   begin
-    conn.exec(sql)
+    result = conn.exec(sql)
   ensure
     conn.close
   end
-end
-
-def sql_string(value)
-  "'#{value.gsub("'","''")}'"
+  result
 end
 
