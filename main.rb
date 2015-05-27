@@ -1,6 +1,6 @@
 require "pry"
 require "sinatra"
-require "sinatra/reloader" if development?
+require "sinatra/reloader"
 require "pg"
 
 get '/' do
@@ -36,10 +36,17 @@ get 'videos/genres' do
   erb :genres
 end
 
-get 'videos/genres/:genre' do
+get 'videos/:genre' do
+  binding.pry
   sql = "select * from videos where genre = '#{params[:genre]}'"
   @videos_by_genre= run_sql(sql)
   erb :genre
+end
+
+get '/edit/:id' do
+  sql = "select * from videos where id = '#{params[:id]}'"
+  @edit_video = run_sql(sql).first
+  erb :edit
 end
 
 private
