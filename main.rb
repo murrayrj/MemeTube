@@ -9,13 +9,9 @@ end
 
 get '/videos' do
   sql = "select * from videos"
-  
-  @videos = @db.exec(sql)
-  @random_video = run_sql(random_sql).to_a.sample
+  @videos = run_sql(sql)
   erb :index
 end
-
-sql = "insert into videos (title, description, url, genre) values ('#{params[:title]}', '#{params[:description]}', '#{params[:url]}', '#{params[:genre]}')"
 
 private
 
