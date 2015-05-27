@@ -14,6 +14,10 @@ get '/videos' do
   erb :index
 end
 
+get '/videos/add' do
+  erb :add
+end
+
 private
 
 def run_sql(sql)
