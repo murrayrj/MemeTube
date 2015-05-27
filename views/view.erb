@@ -1,0 +1,12 @@
+<p><%= @video['title'] %></p>
+<p><%= @video['description'] %></p>
+<p><%= @video['url'] %></p>
+<p><%= @video['genre'] %></p>
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/<%= @video['url'] %>" frameborder="0" allowfullscreen></iframe>
+
+<a href="/videos/<%= @video['id'] %>/edit">Edit</a>
+
+<form action="/videos/<%= @video['id'] %>/delete" method="POST">
+  <button name="_method" value="delete">delete</button>
+</form>
