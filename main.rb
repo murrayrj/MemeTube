@@ -1,7 +1,7 @@
-require "pry"
-require "sinatra"
-require "sinatra/reloader"
-require "pg"
+require 'sinatra'
+require 'sinatra/reloader' if development?
+require 'pg'
+require 'pry-byebug'
 
 get '/' do
   redirect to ('/videos')
@@ -32,7 +32,7 @@ end
 
 get '/videos/:genre' do
   sql = "select * from videos where genre = #{params[:genre]}"
-  @videos_by_genre= run_sql(sql)
+  @videos = run_sql(sql)
   erb :genre
 end
 
@@ -48,7 +48,7 @@ post '/videos/:id' do
   redirect to("/videos/#{params[:id]}")
 end
 
-get '/videos/:id/delete' do
+delete '/videos/:id/delete' do
   sql = "DELETE FROM videos WHERE id = #{params[:id]}"
   run_sql(sql)
   redirect to("/videos")
@@ -59,9 +59,10 @@ private
 def run_sql(sql)
   conn = PG.connect(dbname: 'memetube', host: 'localhost')
   begin
-    conn.exec(sql)
+    result = conn.exec(sql)
   ensure
     conn.close
   end
+  result
 end
 

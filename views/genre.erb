@@ -1,6 +1,6 @@
-<h2><%= @videos_by_genre.first['genre'] %></h2>
+<h2><%= @videos.first['genre'] %></h2>
 <div class="row">
-  <% @videos_by_genre.each do |video| %>
+  <% @videos.each do |video| %>
     <h4><%= video['title'] %></h4>
   <% end %>
 </div>
