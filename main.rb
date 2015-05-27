@@ -30,12 +30,6 @@ get '/videos/view/:id' do
   erb :view
 end
 
-get '/videos/genres' do
-  sql = "select genre from videos group by genre order by genre"
-  @genres = run_sql(sql)
-  erb :genres
-end
-
 get '/videos/:genre' do
   sql = "select * from videos where genre = #{params[:genre]}"
   @videos_by_genre= run_sql(sql)
@@ -48,7 +42,7 @@ get '/videos/:id/edit' do
   erb :edit
 end
 
-post '/videos/:id/' do
+post '/videos/:id' do
   sql = "update videos set title = '#{params[:title]}', description = '#{params[:description]}', url = '#{params[:url]}', genre = '#{params[:genre]}' where id = #{params[:id]}"
   run_sql(sql)
   redirect to("/videos/#{params[:id]}")
@@ -65,10 +59,9 @@ private
 def run_sql(sql)
   conn = PG.connect(dbname: 'memetube', host: 'localhost')
   begin
-    result = conn.exec(sql)
+    conn.exec(sql)
   ensure
     conn.close
   end
-  result
 end
 

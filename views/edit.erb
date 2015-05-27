@@ -1,9 +1,10 @@
 <h2>Edit a Video</h2>
 <p>Each of the fields below is required.</p>
-<form action="/edit/<%= @edit_video['id'] %>" method="POST">
-  <input type="text" id='title' name='title' value="<%= @edit_video['title'] %>" autofocus>
-  <input type="text" id='url' name='url' value="<%= @edit_video['url'] %>">
-  <input type="text" id='genre' name='genre' value="<%= @edit_video['genre'] %>">
+<form action="/videos/<%= @video['id'] %>" method="POST">
+  <input type="text" id='title' name='title' value="<%= @video['title'] %>" autofocus>
+  <input type="text" name="description" id="description" value="<%= @video['description'] %>">
+  <input type="text" id='url' name='url' value="<%= @video['url'] %>">
+  <input type="text" id='genre' name='genre' value="<%= @video['genre'] %>">
   <button>Submit</button>
 </form>
 
