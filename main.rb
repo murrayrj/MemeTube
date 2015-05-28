@@ -31,7 +31,7 @@ get '/videos/:id' do
 end
 
 get '/videos/:genre' do
-  sql = "select * from videos where genre = #{params[:genre]}"
+  sql = "select * from videos where genre = '#{params[:genre]}'"
   @videos = run_sql(sql)
   erb :genre
 end
