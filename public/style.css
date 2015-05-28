@@ -1,0 +1,33 @@
+@font-face
+{
+    font-family: FRINCO;
+    src: url(./FRINCO.ttf);
+}
+
+body
+{
+    font-family: 'FRINCO';
+    color: white;
+    background-image: url('./Fabric 2.png');
+    background-size: cover;
+}
+
+iframe
+{
+    margin-left: 33.3%;
+}
+
+p{
+  text-align: center;
+  font-size: 32px;
+}
+h1 {
+  font-size: 48px;
+  text-align: center;
+}
+input {
+   margin-left: 38%;
+   font-size: 24px;
+   text-align: center;
+   width: 400px;
+}
