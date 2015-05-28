@@ -1,11 +1,12 @@
+<h1>Featured Video</h1>
+<ul>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/<%=@featured_video%>" frameborder="0" allowfullscreen></iframe>
+</ul>
+<h1>Videos</h1>
 <ul>
   <% @videos.each do |video| %>
     
     <iframe width="560" height="315" src="https://www.youtube.com/embed/<%=video['url']%>" frameborder="0" allowfullscreen></iframe>
 
   <% end %>
-</ul>
-
-<ul>
-  <iframe width="560" height="315" src="https://www.youtube.com/embed/<%=@featured_video%>" frameborder="0" allowfullscreen></iframe>
 </ul>
